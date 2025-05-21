@@ -14,7 +14,7 @@ export default function ItemPage({
   const { orgId, itemNumber } = use(rawParams);
   const { data: item, isLoading } = useSWR(
     ["exhibitItem", orgId, itemNumber],
-    () => getExhibitItemById(itemNumber)
+    () => getExhibitItemById(itemNumber) // Assuming "en" is the default language
   );
 
   const pathname = usePathname(); // ✅ gets the path like /org/abc/item/123
@@ -28,6 +28,12 @@ export default function ItemPage({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        <button
+            onClick={() => window.history.back()}
+            className="absolute top-8 left-8 px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow"
+        >
+            ← Back
+        </button>
       {/* ✅ QR Code */}
       <QRCodeCanvas value={currentUrl} size={160} />
 

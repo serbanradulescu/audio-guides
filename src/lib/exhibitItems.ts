@@ -40,10 +40,32 @@ export async function getExhibitItemById(id: string): Promise<ExhibitItem[]> {
     .from(exhibitItems)
     .where(
       and(eq(exhibitItems.ownerId, orgId), eq(exhibitItems.itemNumber, id))
-    )
+    );
 
   if (!item || item.length === 0) {
     throw new Error("Item not found");
   }
   return item;
+}
+
+export async function visitExhibitItemById(
+  id: string,
+  orgId: string,
+  language: string
+): Promise<ExhibitItem> {
+  const item = await db
+    .select()
+    .from(exhibitItems)
+    .where(
+      and(
+        eq(exhibitItems.ownerId, orgId),
+        eq(exhibitItems.itemNumber, id),
+        eq(exhibitItems.language, language)
+      )
+    );
+
+  if (!item || item.length === 0) {
+    throw new Error("Item not found");
+  }
+  return item[0];
 }

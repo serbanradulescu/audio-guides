@@ -3,6 +3,7 @@
 import { getExhibitItems } from "@/lib/exhibitItems";
 import useSWR from "swr";
 import { useOrganization } from "@clerk/nextjs";
+import { AddExhibitItem } from "@/components/add-item";
 
 export default function Home() {
   const { organization, isLoaded } = useOrganization();
@@ -25,15 +26,13 @@ export default function Home() {
         )}
         {isLoaded && organization && (
           <div className="text-center">
-            <p className="mb-4 text-lg font-medium">
-              Welcome to the {organization.name} exhibition!
-            </p>
+            <AddExhibitItem />
           </div>
         )}
         {items && items.length > 0 && organization && (
           <div className="text-center">
             <p className="mb-4 text-lg font-medium">
-              Here are your exhibition items:
+              Your exhibition items:
             </p>
             <ul>
               {items.map((item) => (
