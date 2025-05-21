@@ -4,6 +4,7 @@ import { getExhibitItems } from "@/lib/exhibitItems";
 import useSWR from "swr";
 import { useOrganization } from "@clerk/nextjs";
 import { AddExhibitItem } from "@/components/add-item";
+import { ExhibitItemsDisplay } from "@/components/exhibit-items-display";
 
 export default function Home() {
   const { organization, isLoaded } = useOrganization();
@@ -31,21 +32,9 @@ export default function Home() {
         )}
         {items && items.length > 0 && organization && (
           <div className="text-center">
-            <p className="mb-4 text-lg font-medium">
-              Your exhibition items:
-            </p>
-            <ul>
-              {items.map((item) => (
-                <li key={item.itemNumber}>
-                  <a
-                    href={`/${organization.id}/${item.itemNumber}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    {item.itemNumber} {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+           
+
+            <ExhibitItemsDisplay items={items} />
           </div>
         )}
         {/* You can render other main content below if needed */}
