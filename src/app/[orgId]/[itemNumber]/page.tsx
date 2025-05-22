@@ -1,7 +1,6 @@
 "use client";
 
 import { getExhibitItemById } from "@/lib/exhibitItems";
-import { usePathname } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 import { use } from "react";
 import useSWR from "swr";
